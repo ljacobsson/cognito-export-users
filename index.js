@@ -25,6 +25,15 @@ if (!cli.input[0]) {
   cli.showHelp();
 }
 
+const credentials = new AWS.SharedIniFileCredentials({
+  profile: process.env.AWS_PROFILE
+});
+
+AWS.config.credentials = credentials;
+AWS.config.update({
+  region: "eu-west-1"
+});
+
 const UserPoolId = cli.input[0];
 const region = UserPoolId.substring(0, UserPoolId.indexOf('_'));
 
